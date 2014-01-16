@@ -1,0 +1,51 @@
+{
+  "name": "passport-daum",
+  "version": "0.0.1",
+  "description": "Daum authentication strategy for Passport.",
+  "keywords": [
+    "passport",
+    "daum",
+    "auth",
+    "authn",
+    "authentication",
+    "identity"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uiandwe/passport-daum"
+  },
+  "bugs": {
+    "url": "https://github.com/uiandwe/passport-daum/issues"
+  },
+  "author": {
+    "name": "jay hyeon",
+    "email": "uiandwe@gmail.com",
+    "url": "http://uiandwe.tistory.com/"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "main": "./lib",
+  "dependencies": {
+    "passport-oauth1": "1.x.x",
+    "xtraverse": "0.1.x"
+  },
+  "devDependencies": {
+    "mocha": "1.x.x",
+    "chai": "1.x.x",
+    "chai-passport-strategy": "0.1.x"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js"
+  },
+  "readme": "# passport-daum\n\n",
+  "readmeFilename": "README.md",
+  "_id": "passport-daum@0.0.1",
+  "_from": "passport-daum@0.0.1"
+}
