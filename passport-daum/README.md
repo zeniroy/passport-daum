@@ -33,13 +33,17 @@ consumer secret, and callback URL within `options`.  The consumer key and secret
 are obtained by [creating an application](http://dna.daum.net) site.
 
     passport.use(new DaumStrategy({
-   consumerKey: pkginfo.oauth.daum.DAUM_CONSUMER_KEY,
-    consumerSecret: pkginfo.oauth.daum.DAUM_CONSUMER_SECRET,
-    callbackURL: pkginfo.oauth.daum.callbackURL
-  }, function(token, tokenSecret, profile, done) {
-    return done(null, profile);
-  }));
-
+        userKey: '--insert-daum-user-key-here--'
+        , nonce: '--insert-daum-secret-key-here--'
+        , callbackURL: "http://127.0.0.1:3000/auth/daum/callback"
+      },
+      function(userKey, profile, done) {
+        User.findOrCreate(profile, function (err, user) {
+          done(err, user);
+        });
+      }
+    ));
+  
 
 #### Authenticate Requests
 
@@ -51,11 +55,11 @@ application:
 
     app.get('/auth/daum', passport.authenticate('daum'));
 
-   app.get('/auth/daum/callback', passport.authenticate('daum',  {
-    successRedirect: '/',
-    failureRedirect: '/'
-  }));
-
+     app.get('/auth/daum/callback',
+      passport.authenticate('daum', { failureRedirect: '/login' }),
+      function(req, res) {
+        res.redirect('/');
+      });
 
 ## Examples
 
