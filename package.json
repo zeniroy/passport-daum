@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/uiandwe/passport-daum"
+    "url": "git://github.com/uiandwe/passport-daum.git"
   },
   "bugs": {
     "url": "https://github.com/uiandwe/passport-daum/issues"
