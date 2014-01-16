@@ -5,7 +5,7 @@ function init(app) {
   app.use(passport.initialize());
   app.use(passport.session());
 
- var DaumStrategy = require('passport-twitter').Strategy;
+ var DaumStrategy = require('passport-daum').Strategy;
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -29,7 +29,6 @@ passport.use(new DaumStrategy({
 
   
    app.get('/auth/daum/callback', passport.authenticate('daum',  {
-        
     successRedirect: '/',
     failureRedirect: '/'
    
@@ -38,10 +37,6 @@ passport.use(new DaumStrategy({
   
   
   app.get('/logout', function(req, res){
-    //
-    // passport 에서 지원하는 logout 메소드이다.
-    // req.session.passport 의 정보를 삭제한다.
-    //
     req.logout();
     res.redirect('/');
   });

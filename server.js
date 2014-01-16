@@ -1,84 +1,46 @@
+process.title = process.argv[3] || 'nodestatic.com : Static WebServer';
 //
-// # SimpleServer
+// declare
 //
-// A simple chat server using Socket.IO, Express, and Async.
+var express = require('express'),
+    fs = require('fs');
+var port = process.env.PORT;
+var app = express();
+// ------
+// !! 아래 부분을 추가하자. ejs 와 session
 //
-var http = require('http');
-var path = require('path');
+app.set('views', __dirname);
+app.set('view engine', 'ejs');
+app.use(express.cookieParser());
+app.use(express.session({
+  key    : 'sid',
+  secret : 'secret'
+}));
+// --------
+//
+// static serving
+//
+app.use(express.static(__dirname));
+//
+// **oauth.js** 파일에 OAuth 관련 설정을 하자. app 객체를 전달하자.
+//
+require('./oauth_daum')(app);
 
-var async = require('async');
-var socketio = require('socket.io');
-var express = require('express');
+app.get('/', function(req, res) {
+  //  console.log(req.session);
+  res.render('index', { user: req.session.passport.user || {} });
+});
+
 
 //
-// ## SimpleServer `SimpleServer(obj)`
+// 404 page
 //
-// Creates a new instance of SimpleServer with the following options:
-//  * `port` - The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
+app.get('*', function(req, res) {
+  res.type('html').send(404, fs.readFileSync('404.html'));
+});
 //
-var router = express();
-var server = http.createServer(router);
-var io = socketio.listen(server);
-
-router.use(express.static(path.resolve(__dirname, 'client')));
-var messages = [];
-var sockets = [];
-
-io.on('connection', function (socket) {
-    messages.forEach(function (data) {
-      socket.emit('message', data);
-    });
-
-    sockets.push(socket);
-
-    socket.on('disconnect', function () {
-      sockets.splice(sockets.indexOf(socket), 1);
-      updateRoster();
-    });
-
-    socket.on('message', function (msg) {
-      var text = String(msg || '');
-
-      if (!text)
-        return;
-
-      socket.get('name', function (err, name) {
-        var data = {
-          name: name,
-          text: text
-        };
-
-        broadcast('message', data);
-        messages.push(data);
-      });
-    });
-
-    socket.on('identify', function (name) {
-      socket.set('name', String(name || 'Anonymous'), function (err) {
-        updateRoster();
-      });
-    });
-  });
-
-function updateRoster() {
-  async.map(
-    sockets,
-    function (socket, callback) {
-      socket.get('name', callback);
-    },
-    function (err, names) {
-      broadcast('roster', names);
-    }
-  );
-}
-
-function broadcast(event, data) {
-  sockets.forEach(function (socket) {
-    socket.emit(event, data);
-  });
-}
-
-server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
-  var addr = server.address();
-  console.log("Chat server listening at", addr.address + ":" + addr.port);
+// listen
+//
+app.listen(port, function() {
+  console.log("\x1B[36mStart static server, listen port: " + port + '\x1B[39m')
 });
