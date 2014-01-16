@@ -40,5 +40,5 @@
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js"
   },
-  "_from": "passport-daum@0.0.1",
+  "_from": "passport-daum@0.0.1"
 }
