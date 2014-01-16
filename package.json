@@ -17,11 +17,7 @@
   "bugs": {
     "url": "https://github.com/uiandwe/passport-daum/issues"
   },
-  "author": {
-    "name": "jay hyeon",
-    "email": "uiandwe@gmail.com",
-    "url": "http://uiandwe.tistory.com/"
-  },
+  "author": "jay hyeon <uiandwe@gmail.com> (http://uiandwe.tistory.com/)",
   "licenses": [
     {
       "type": "MIT",
@@ -44,8 +40,5 @@
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js"
   },
-  "readme": "# passport-daum\n\n",
-  "readmeFilename": "README.md",
-  "_id": "passport-daum@0.0.1",
-  "_from": "passport-daum@0.0.1"
+  "_from": "passport-daum@0.0.1",
 }
