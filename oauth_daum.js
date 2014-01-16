@@ -17,9 +17,9 @@ passport.serializeUser(function(user, done) {
   
  
 passport.use(new DaumStrategy({
-   consumerKey: pkginfo.oauth.twitter.TWITTER_CONSUMER_KEY,
-    consumerSecret: pkginfo.oauth.twitter.TWITTER_CONSUMER_SECRET,
-    callbackURL: pkginfo.oauth.twitter.callbackURL
+   consumerKey: pkginfo.oauth.daum.DAUM_CONSUMER_KEY,
+    consumerSecret: pkginfo.oauth.daum.DAUM_CONSUMER_SECRET,
+    callbackURL: pkginfo.oauth.daum.callbackURL
   }, function(token, tokenSecret, profile, done) {
     return done(null, profile);
   }));

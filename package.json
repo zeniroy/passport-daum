@@ -14,9 +14,9 @@
     "ejs": "~0.8.5"
   },
   "oauth": {
-    "twitter": {
-      "TWITTER_CONSUMER_KEY": "e74ce883-571e-40dc-801b-c77e02e57051",
-      "TWITTER_CONSUMER_SECRET": "bB-B3DeHQK7rk2Xhq13dU4jSNuLhuvShSidl41LHjVQ8vKBZ_TSPSw00",
+    "daum": {
+      "DAUM_CONSUMER_KEY": "e74ce883-571e-40dc-801b-c77e02e57051",
+      "DAUM_CONSUMER_SECRET": "bB-B3DeHQK7rk2Xhq13dU4jSNuLhuvShSidl41LHjVQ8vKBZ_TSPSw00",
       "callbackURL": "https://oauth-c9-uiandwe.c9.io/auth/daum/callback"
     }
   }
